@@ -10,4 +10,5 @@ finn.db-wal
 *.db-shm
 *.db-wal
 *.log
+*.pdf
 FINN_Submission_Package.zip
