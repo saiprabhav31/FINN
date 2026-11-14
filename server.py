@@ -3,7 +3,7 @@ from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 from pathlib import Path
 import json, sqlite3, urllib.request, urllib.error, datetime, re, os, http.cookiejar, html, hashlib
-import io, ipaddress
+import io, ipaddress, zipfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from html.parser import HTMLParser
 
@@ -303,6 +303,17 @@ def extract_document_pages(doc):
         if length and int(length)>15_000_000: raise ValueError('Document exceeds the 15 MB indexing limit')
         raw=response.read(15_000_001)
     if len(raw)>15_000_000: raise ValueError('Document exceeds the 15 MB indexing limit')
+    if raw.startswith(b'PK\x03\x04') or content_type in ('application/zip','application/x-zip-compressed'):
+        try:
+            with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+                candidates=[entry for entry in archive.infolist() if not entry.is_dir() and entry.filename.lower().endswith('.pdf')]
+                if not candidates: raise ValueError('ZIP archive contains no PDF document')
+                member=candidates[0]
+                if member.file_size>50_000_000: raise ValueError('PDF inside ZIP exceeds the 50 MB expansion limit')
+                raw=archive.read(member)
+        except zipfile.BadZipFile as e: raise ValueError('Downloaded ZIP archive is invalid') from e
+        if not raw.startswith(b'%PDF-'): raise ValueError('ZIP archive did not contain a readable PDF')
+        content_type='application/pdf'
     if raw.startswith(b'%PDF-') or content_type=='application/pdf':
         try:
             from pypdf import PdfReader
@@ -398,7 +409,7 @@ class Handler(SimpleHTTPRequestHandler):
         if path=='/api/events': return self.send_json(events_with_network())
         if path=='/api/sync/status': return self.send_json(rows('SELECT * FROM sync_log ORDER BY id DESC LIMIT 20'))
         if path=='/api/network':
-            term=' '.join(q.get('q',['']).split()).lower()
+            term=' '.join(q.get('q',[''])[0].split()).lower()
             ps=network_profiles()
             return self.send_json([p for p in ps if not term or term in ' '.join(str(v) for v in p.values()).lower()])
         if path.startswith('/api/quote/'):
