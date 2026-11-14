@@ -14,11 +14,11 @@ I’m submitting FINN, a mobile-first investment intelligence prototype built fo
 - **Public source repository:** [ADD PUBLIC REPOSITORY URL]
 - **Build history:** see `AI_BUILD_HISTORY.md` in the repository (and add the relevant coding-agent session export/share link if requested).
 
-FINN brings together a prioritized daily brief, on-demand company research, and a private network-intelligence view. The prototype includes a persistent SQLite API, an NSE announcement sync with source links, NSE-first quote lookup, Yahoo Finance end-of-day price history, configurable price/volume alerts, report/transcript link discovery, synthetic network profiles, and alert preferences. Research figures and seeded announcements are explicitly marked as simulated. Report and transcript links are discoverable, but their contents are not yet parsed into source-cited financial analysis.
+FINN brings together a prioritized daily brief, on-demand company research, and a private network-intelligence view. The prototype includes a persistent SQLite API, an NSE announcement sync with source links, NSE-first quote lookup, Yahoo Finance end-of-day price history, configurable price/volume alerts, report/transcript discovery and page-cited text search, synthetic network profiles, and alert preferences. Numeric company metrics stay hidden until source evidence is available. Search is deterministic and passage-based; it does not use an LLM or claim to calculate period comparisons.
 
 I kept the scope deliberately narrow so the core interaction is demonstrable on a phone. The backend stores portfolio, filing, network, source-reference, research-note, and preference records in SQLite. Market quotes are fetched on demand; the demo can run in read-only mode for a public showcase. Network profiles are synthetic, and the local version should not be used with sensitive personal data.
 
-Given more time, I would replace the public-web announcement adapter with an approved/licensed feed for production use, build source-cited extraction for annual reports/results/transcripts, and add authentication plus tenant isolation before handling real investor networks.
+Given more time, I would add period-aware statement-table extraction for QoQ/YoY comparisons, replace the public-web announcement adapter with an approved/licensed feed, and add authentication plus tenant isolation before handling real investor networks.
 
 Thank you for your time. I’d be glad to walk through the product and the implementation decisions.
 
