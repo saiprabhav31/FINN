@@ -1,0 +1,11 @@
+.git
+.gitignore
+__pycache__
+finn.db*
+*.pdf
+*.pyc
+.env
+.env.*
+*.db
+*.log
+FINN_Submission_Package.zip

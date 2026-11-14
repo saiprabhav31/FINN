@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+finn.db
+finn.db-shm
+finn.db-wal
+*.db
+*.db-shm
+*.db-wal
+*.log
+FINN_Submission_Package.zip

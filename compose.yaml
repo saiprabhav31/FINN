@@ -1,0 +1,15 @@
+services:
+  finn:
+    build: .
+    ports:
+      - "8765:8765"
+    environment:
+      FINN_HOST: 0.0.0.0
+      FINN_PORT: 8765
+      FINN_DB_PATH: /data/finn.db
+      FINN_READ_ONLY: "1"
+    volumes:
+      - finn-data:/data
+    restart: unless-stopped
+volumes:
+  finn-data:
