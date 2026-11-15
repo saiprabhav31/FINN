@@ -3,6 +3,8 @@ name: Deploy mobile demo to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '15 2 * * *'
   workflow_dispatch:
 
 permissions:
@@ -25,6 +27,14 @@ jobs:
         uses: actions/checkout@v6
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install document reader
+        run: python -m pip install -r requirements.txt
+      - name: Collect public data snapshot
+        run: python scripts/build_demo_snapshot.py
       - name: Upload site
         uses: actions/upload-pages-artifact@v4
         with:

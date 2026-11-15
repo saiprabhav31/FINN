@@ -13,3 +13,4 @@ finn.db-wal
 *.log
 *.pdf
 FINN_Submission_Package.zip
+demo-data.json

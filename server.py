@@ -220,7 +220,6 @@ def sync_nse_announcements():
     try: watched=set(json.loads(saved[0]['value'])) if saved else {'Results','M&A','Management','Litigation','Capex'}
     except (ValueError,TypeError): watched={'Results','M&A','Management','Litigation','Capex'}
     with connect() as c:
-        c.execute("DELETE FROM events WHERE source='Synthetic demo'")
         for item in data:
             ticker=str(item.get('symbol') or item.get('symbolName') or '').upper().strip()
             if ticker not in portfolio: continue
