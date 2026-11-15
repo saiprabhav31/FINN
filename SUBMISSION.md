@@ -32,8 +32,8 @@ Regards,
 
 - [x] Add a public responsive frontend preview and public source repository.
 - [ ] Deploy and verify the read-only API using the Compose configuration before representing it as a live full-stack demo.
-- [ ] Open the demo on a phone-sized viewport and verify the layout before sending.
-- [ ] Confirm the repository does not contain `finn.db`, real contacts, credentials, or personal data.
+- [x] Open the demo on a phone-sized viewport and verify the layout before sending.
+- [x] Confirm the repository does not contain `finn.db`, real contacts, credentials, or personal data.
 - [ ] Add your name/contact details and confirm the requested email subject.
 - [x] Link the full Codex build conversation; `AI_BUILD_HISTORY.md` explains the session’s scope and limitations.
 - [ ] Send the email yourself after reviewing the final links and wording.
