@@ -10,15 +10,15 @@ Dear ENAM team,
 
 I’m submitting FINN, a mobile-first investment intelligence prototype built for the Founding AI Engineer challenge.
 
-- **Working demo:** [ADD DEPLOYED DEMO URL]
-- **Public source repository:** [ADD PUBLIC REPOSITORY URL]
-- **Build history:** see `AI_BUILD_HISTORY.md` in the repository (and add the relevant coding-agent session export/share link if requested).
+- **Working demo:** https://saiprabhav31.github.io/FINN/ (responsive public preview; synthetic offline-demo data)
+- **Public source repository:** https://github.com/saiprabhav31/FINN
+- **AI build history:** `AI_BUILD_HISTORY.md` and its full Codex session share link in the repository.
 
-FINN brings together a prioritized daily brief, on-demand company research, and a private network-intelligence view. The prototype includes a persistent SQLite API, an NSE announcement sync with source links, NSE-first quote lookup, Yahoo Finance end-of-day price history, configurable price/volume alerts, report/transcript discovery and page-cited text search, synthetic network profiles, and alert preferences. Numeric company metrics stay hidden until source evidence is available. Search is deterministic and passage-based; it does not use an LLM or claim to calculate period comparisons.
+FINN brings together a prioritized daily brief, on-demand company research, and a private network-intelligence view. Its responsive frontend is available on GitHub Pages; the public phone demo runs with synthetic offline-demo data. The local Python REST API and SQLite store support an NSE announcement sync with source links, NSE-first quote lookup, Yahoo Finance end-of-day price history, configurable price/volume alerts, report/transcript discovery, page-cited text search, and alert preferences. Numeric company metrics stay hidden until source evidence is available. Search is deterministic and passage-based; the running product does not use an LLM or claim to calculate period comparisons.
 
-I kept the scope deliberately narrow so the core interaction is demonstrable on a phone. The backend stores portfolio, filing, network, source-reference, research-note, and preference records in SQLite. Market quotes are fetched on demand; the demo can run in read-only mode for a public showcase. Network profiles are synthetic, and the local version should not be used with sensitive personal data.
+The architecture is a mobile-first single-page frontend, a small Python HTTP API, and SQLite persistence. GitHub Pages hosts only the frontend; the read-only Docker Compose setup is the deployment path for the API. NSE, Yahoo Finance, and Screener adapters fetch public market and source-document data. I left LLM agents out of the runtime so returned research stays tied to exact source passages. Seeded events and network profiles are synthetic; the public showcase is read-only, and the app has no authentication or tenant isolation, so it must not store real contact data.
 
-Given more time, I would add period-aware statement-table extraction for QoQ/YoY comparisons, replace the public-web announcement adapter with an approved/licensed feed, and add authentication plus tenant isolation before handling real investor networks.
+I deliberately left out unsourced financial summaries, automatic QoQ/YoY calculations, OCR for scanned PDFs, real-network imports, and investor outreach. Next I would add period-aware statement-table extraction, replace public-web adapters with approved/licensed feeds, and build authentication plus tenant isolation before handling real investor networks.
 
 Thank you for your time. I’d be glad to walk through the product and the implementation decisions.
 
@@ -30,12 +30,12 @@ Regards,
 
 ## Release checklist
 
-- [ ] Replace both placeholder URLs with a publicly reachable demo and repository.
-- [ ] Confirm the public demo is running with the read-only Compose configuration.
+- [x] Add a public responsive frontend preview and public source repository.
+- [ ] Deploy and verify the read-only API using the Compose configuration before representing it as a live full-stack demo.
 - [ ] Open the demo on a phone-sized viewport and verify the layout before sending.
 - [ ] Confirm the repository does not contain `finn.db`, real contacts, credentials, or personal data.
 - [ ] Add your name/contact details and confirm the requested email subject.
-- [ ] Attach or link the full coding-agent/LLM session export if available; the included build-history note is a summary, not a raw session export.
+- [x] Link the full Codex build conversation; `AI_BUILD_HISTORY.md` explains the session’s scope and limitations.
 - [ ] Send the email yourself after reviewing the final links and wording.
 
 ## Demo deployment

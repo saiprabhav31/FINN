@@ -2,6 +2,10 @@
 
 A responsive, mobile-first local full-stack app for the ENAM Founding AI Engineer build challenge. It demonstrates a daily Push brief, on-demand Pull research, and a private Network layer woven into both.
 
+## Phone demo
+
+Try the [public mobile demo](https://saiprabhav31.github.io/FINN/). GitHub Pages serves the responsive frontend in offline-demo mode with clearly labelled synthetic examples. The public page does not run the Python API; live quote, filing-sync, and document-index actions require the local server described below. Every push to `main` deploys the site through `.github/workflows/deploy-pages.yml`.
+
 ## Run it
 
 Install the one document-extraction dependency with `python -m pip install -r requirements.txt`, then run `python server.py` (Python 3.9+) and open `http://127.0.0.1:8765`. The server creates `finn.db` on first run and seeds the demo portfolio. No API key is required. Ctrl+C stops the server. If you open `index.html` directly, the frontend falls back to in-memory demo data and database actions are unavailable.
