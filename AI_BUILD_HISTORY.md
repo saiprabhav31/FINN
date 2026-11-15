@@ -26,4 +26,4 @@ NSE announcement, Yahoo Finance and Screener endpoints may rate-limit or block r
 
 ## Session provenance
 
-The code was created and iterated in the Codex task associated with this workspace. Add the actual Codex share link or export here if one is created for submission; this document does not fabricate a share URL.
+The code was created and iterated in the Codex task associated with this workspace. The public session link is [the full Codex build conversation](https://chatgpt.com/s/cx_6af96e80650081919771ec2500e3e0ee). It records the build sequence, API verification, course corrections, and handoff decisions; this Markdown file remains the concise project summary.
