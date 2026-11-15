@@ -89,8 +89,9 @@
       ticker,
       question,
       matches,
+      mode: "snapshot",
       method: "Keyword retrieval from short excerpts in the dated public snapshot. Open the source document to review the full context.",
-      notice: "Excerpts are evidence to review. FINN does not infer values, periods, or guidance that the source does not state.",
+      notice: "Excerpts are evidence to review. The public snapshot includes a limited TCS excerpt set; FINN does not infer values, periods, or guidance that the source does not state.",
     };
   }
 
