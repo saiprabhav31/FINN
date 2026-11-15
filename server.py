@@ -336,11 +336,20 @@ def extract_document_pages(doc):
     # HTML transcripts have no stable page numbers. Store bounded sections and cite the source URL.
     return [(n+1,text[i:i+10_000]) for n,i in enumerate(range(0,min(len(text),1_000_000),10_000))]
 
+def document_year(doc):
+    text=urllib.parse.unquote(str(doc.get('title','')+' '+doc.get('url','')))
+    years=[]
+    for start,end in re.findall(r'\b(20\d{2})(?:-(20\d{2}|\d{2}))?\b',text):
+        years.append(int(start))
+        if end: years.append(int(end) if len(end)==4 else 2000+int(end))
+    return max(years,default=0)
+
 def index_company_documents(ticker):
     ticker=ticker.upper()
     docs=rows('''SELECT d.*,i.page_count,i.char_count,i.indexed_at,i.error FROM company_documents d
         LEFT JOIN company_document_index i ON i.document_id=d.id WHERE d.ticker=? ORDER BY d.discovered_at DESC,d.id DESC''',(ticker,))
     if not docs: raise ValueError('Find company documents first, then index their source text')
+    docs.sort(key=lambda d:(document_year(d),d.get('kind')=='concall / transcript',d.get('discovered_at') or '',d['id']),reverse=True)
     indexed=0; errors=[]
     for doc in docs[:4]:
         if doc.get('indexed_at') and not doc.get('error'): continue
